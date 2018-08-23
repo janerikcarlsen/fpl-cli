@@ -1,0 +1,10 @@
+future
+requests
+click
+pyfiglet
+PyInquirer  
+colorama 
+termcolor 
+six
+PrettyTable
+configparser
