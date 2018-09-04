@@ -2,8 +2,8 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/fplcli.svg)](https://pypi.org/project/fplcli)
 
 # fpl-cli
-FPL CLI is a command line tool for Fantasy Premier League, written in Python. 
-The tools integrates with Fantasy Premier League API, and provides the following features directly to your terminal window: 
+fpl-cli is a command line tool for Fantasy Premier League, written in Python.
+The tool gets it's data from the official Fantasy Premier League API, and currently supports the following actions:  
 ```
 fpl                     (Get the help menu)
 fpl configure           (Input your team_id as found in the URL of your points status on fantasy.premierleague.com)
@@ -16,22 +16,69 @@ fpl players             (Get information about all players that are available fo
 ```
 
 # Installing 
-FPL CLI has been tested with Python versions 2.7, 3.4, 3.5, 3.6 and 3.7.
-In a terminal window where Python is installed (Verify Python version with `python --version`): 
+fpl-cli has been tested with Python versions 2.7, 3.4, 3.5, 3.6 and 3.7.
+In a terminal window, verify Python version: 
+```
+python --version
+pip --version
+``` 
+If no Python/pip version is found, [download Python and pip before proceeding](https://www.python.org/downloads/)
 ```
 pip install fplcli
 ```
-then proceed to use FPL CLI starting with 
+then proceed to use fpl-cli : 
 ```
 fpl configure
 ```
 
-# Upcoming releases
-Future features include: 
+# Using fpl-cli
+## Configure fpl-cli 
+Start using fpl-cli by telling it your team_id. You can find your team_id by going to the Points tab at https://fantasy.premierleague.com and find the number in between `team/` and `event/` in the url.
 
-* Actions that require authentication with the FPL API, such as making tranfers and preparing your team for the next Gameweek. 
-* Live recalculation of league table standings during games, including penalty for hits
+![fpl configure](docs/img/fpl_configure.png?raw=true "fpl configure")
+
+## Get help 
+Get an overview of the allowed actions by typing `fpl` or `fpl --help`
+
+![fpl help](docs/img/fpl_help.png?raw=true "fpl help")
+
+## Get current points total for you team
+The points total is updated during games based on live score data. (Provisional bonus not included yet)
+
+![fpl points](docs/img/fpl_points.png?raw=true "fpl points")
+
+## Get all leagues you're member of
+Returns all leagues you participate in (Head 2 Head leagues not included yet)
+
+![fpl leagues](docs/img/fpl_leagues.png?raw=true "fpl leagues")
+
+## Get league standings
+Returns league standings for a single league. You find the league_id in the leftmost `Id` column in the `fpl leagues` result
+
+![fpl league](docs/img/fpl_league.png?raw=true "fpl league")
+
+## Get live league standings
+Returns live league standings for a single league, where all teams score are updated in real time based on live score data. This one is a separate action from the `fpl league` action because it requires ~2 API calls for each team in the league and is therefore significantly slower (~3-5 seconds for a league of about 20 teams, depending on response times from Fantasy Premier League API).
+
+![fpl league](docs/img/fpl_league.png?raw=true "fpl league")
+
+
+# Planned features
+Planned future features include:
+
+* Include all major features from fantasy.premierleague.com
+* Actions that require authentication with the FPL API (Making transfers, prepare team for next Gameweek) 
+* Live recalculation of league standings during games
+* Include provisional bonus in live league and points view
 * Player sorting/filtering and enriched player staticstics
-* Transfer suggestions
+* Cache API calls to improve response times, especially for live leagues
+* Transfer suggestions based on form and upcoming fixture difficulty
 
-If you have an idea for a feature or enhancement that you would like to see from FPL CLI, please post an issue in the github repository, or submit a Pull Request with the suggested change.
+Ideas for features or enhancement that you would like to see from fpl-cli are welcome, please post an [issue in the GitHub repository](https://github.com/janerikcarlsen/fpl-cli/issues), or even better, submit a Pull Request with the suggested change.
+
+# Develop
+To develop fpl-cli: 
+* Clone this repository
+* Create a virtualenv using python 2.7, 3.4, 3.5, 3.6 or 3.7, and inside that: 
+* `pip install -r requirements.txt`
+* `pip install -r ci-requirements.txt`

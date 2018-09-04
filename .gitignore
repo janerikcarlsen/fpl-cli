@@ -109,3 +109,6 @@ venv*
 
 # VS Code files
 .vscode/*
+
+# DS Store
+.DS_store
