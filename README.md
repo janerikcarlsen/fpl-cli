@@ -7,12 +7,12 @@ The tool gets its data from the official Fantasy Premier League API, and current
 ```
 fpl                     Returns help menu
 fpl configure           Set up team_id (required)
-fpl points              Returns live points for your team
-fpl leagues             Returns all leagues for my team entry
+fpl points              Returns live points for a team
+fpl leagues             Returns all leagues for a team entry
 fpl league <id>         Returns confirmed scores for a league by id
 fpl liveleague <id>     Returns live scores for a league by id
-fpl entry               Returns information about your team entry
-fpl players             Returns all players, sorted by total score
+fpl entry               Returns information about a team entry
+fpl players             Returns all players in the game, sorted by total score
 ```
 
 # Installing 
@@ -39,7 +39,7 @@ Get an overview of the allowed actions by typing `fpl` or `fpl --help`
 ![fpl help](docs/img/fpl_help.png?raw=true "fpl help")
 
 ## Get current points total for you team
-The points total is updated during games based on live score data. (Provisional bonus not included yet)
+The points total and player score is updated during games based on live score data. Provisional bonus are not included yet.
 
 ![fpl points](docs/img/fpl_points.png?raw=true "fpl points")
 
@@ -56,15 +56,16 @@ Returns league standings for a single league. You find the league_id in the left
 ## Get live league standings
 Returns live league standings for a single league, where all teams score are updated in real time based on live score data. This one is a separate action from the `fpl league` action because it requires ~2 API calls for each team in the league and is therefore significantly slower (~3-5 seconds for a league of about 20 teams, depending on response times from Fantasy Premier League API).
 
-![fpl league](docs/img/fpl_league.png?raw=true "fpl league")
+![fpl liveleague](docs/img/fpl_liveleague.png?raw=true "fpl liveleague")
 
 
 # Planned features
 Planned future features include:
 
 * Include all major features from fantasy.premierleague.com
-* Actions that require authentication with the FPL API (Making transfers, prepare team for next Gameweek) 
-* Live recalculation of league standings during games
+* Include H2H leagues in leagues view
+* Actions that require authentication with the FPL API (Making transfers, prepare team for next Gameweek)
+* Live updates of league standings during games based on new points total
 * Include provisional bonus in live league and points view
 * Player sorting/filtering and enriched player staticstics
 * Cache API calls to improve response times, especially for live leagues
