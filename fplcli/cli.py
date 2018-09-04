@@ -1,5 +1,5 @@
 import os
-from configparser import ConfigParser
+import sys
 import click
 from . import fplapi
 from . import configure as conf
@@ -12,19 +12,12 @@ from .cliprinter import pretty_players
 from .cliprinter import pretty_entry
 
 
-def get_config():
-    config = ConfigParser()
-    filename = os.path.expanduser("~/.fpl/config")
-    try:
-        config.read(filename)
-    except Exception:
-        print("FPL CLI is not configured. Type: fpl configure")
-    return config
-
-
-config = get_config()
-TEAM_ID = config["DEFAULT"]["team_id"]
-
+def get_team_id():
+    try: 
+        config = conf.get_config()
+        return config["DEFAULT"]["team_id"]
+    except KeyError: 
+        sys.exit("FPL CLI is not configured. Type: fpl configure")
 
 @click.group()
 def main():
@@ -45,7 +38,7 @@ def players():
 @main.command()
 def leagues():
     """Returns all leagues for my team entry"""
-    leagues = fplapi.leagues_entered(TEAM_ID)
+    leagues = fplapi.leagues_entered(get_team_id())
     out(pretty_leagues(leagues))
 
 
@@ -71,14 +64,14 @@ def entry():
     Returns information about your team entry,
     using the team_id as configured in 'fpl configure'
     """
-    my_entry = fplapi.entry(TEAM_ID)
+    my_entry = fplapi.entry(get_team_id())
     out(pretty_entry(my_entry))
 
 
 @main.command()
 def points():
     """Returns live points for your team"""
-    picks = fplapi.live_points(TEAM_ID)
+    picks = fplapi.live_points(get_team_id())
     out(pretty_picks_info(picks))
     out(pretty_picks_players(picks))
 
@@ -90,7 +83,7 @@ def configure():
     """
     conf.configure()
     out("fpl-cli configured. Type 'fpl' for instructions")
-    
+
 
 if __name__ == '__main__':
     main()

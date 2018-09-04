@@ -2,6 +2,12 @@ import os
 from configparser import ConfigParser
 from builtins import input
 
+def get_config():
+    config = ConfigParser()
+    filename = os.path.expanduser("~/.fpl/config")
+    config.read(filename)
+    return config
+
 def configure(): 
     """Configure FPL CLI. Saves the team_id to ~/.fpl/config"""
     config = ConfigParser()
@@ -11,7 +17,7 @@ def configure():
         config.read(filename)
         team_id = config['DEFAULT']['team_id']
     except Exception:
-        print("Didn't find existing configuration, proceeding")
+        print("No existing configuration found, proceeding")
     
     team_id = input("FPL team_id [ " + team_id +" ]: ") or team_id
     config['DEFAULT'] = {}

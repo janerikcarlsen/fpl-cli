@@ -21,7 +21,7 @@ else:
 
 setuptools.setup(
     name="fplcli",
-    version="0.1.4",
+    version="0.1.5",
     author="Jan-Erik Carlsen",
     author_email="jan.erik.carlsen@gmail.com",
     description="A CLI tool for Fantasy Premier League",
