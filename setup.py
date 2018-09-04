@@ -10,18 +10,14 @@ install_requires = [
         "click",
         "pyfiglet",   
         "six", 
-        "Prettytable"
+        "Prettytable",
+        "termcolor", 
+        "colorama"
     ]
-
-# Colorama is needed on Windows to enable ANSI coloring
-if sys.platform == 'win32':
-    install_requires.append('colorama')
-else: 
-    install_requires.append('termcolor')
 
 setuptools.setup(
     name="fplcli",
-    version="0.1.5",
+    version="0.1.6",
     author="Jan-Erik Carlsen",
     author_email="jan.erik.carlsen@gmail.com",
     description="A CLI tool for Fantasy Premier League",
