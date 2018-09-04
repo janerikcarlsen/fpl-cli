@@ -52,7 +52,7 @@ def leagues():
 @main.command()
 @click.argument("league_id")
 def league(league_id):
-    """Returns live score for a league by id"""
+    """Returns confirmed scores for a league by id"""
     league = fplapi.league(league_id)
     out(pretty_league(league))
 
@@ -60,7 +60,7 @@ def league(league_id):
 @main.command()
 @click.argument("league_id")
 def liveleague(league_id):
-    """Returns live score for a league by id"""
+    """Returns live scores for a league by id"""
     league = fplapi.live_league(league_id)
     out(pretty_league(league, live=True))
 
@@ -86,12 +86,11 @@ def points():
 @main.command()
 def configure():
     """
-    Set up team_id (required) and username and password (optional).
-    Username and password are required for actions that require authentication
+    Set up team_id (required)
     """
     conf.configure()
-    out("FPL-CLI configured. Now try typing 'fpl' for instructions")
-
+    out("fpl-cli configured. Type 'fpl' for instructions")
+    
 
 if __name__ == '__main__':
     main()
