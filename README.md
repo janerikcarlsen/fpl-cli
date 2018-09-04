@@ -3,21 +3,21 @@
 
 # fpl-cli
 fpl-cli is a command line tool for Fantasy Premier League, written in Python.
-The tool gets it's data from the official Fantasy Premier League API, and currently supports the following actions:  
+The tool gets its data from the official Fantasy Premier League API, and currently supports the following actions:  
 ```
-fpl                     (Get the help menu)
-fpl configure           (Input your team_id as found in the URL of your points status on fantasy.premierleague.com)
-fpl points              (Get the live points for your team, player and team scores are updated live)
-fpl leagues             (Get the leagues you participate in)
-fpl league <id>         (Get league information about a league by league_id)
-fpl liveleague <id>     (Get live updated league information about a league by league_id)
-fpl entry               (Get your team/user information)
-fpl players             (Get information about all players that are available for selection)
+fpl                     Returns help menu
+fpl configure           Set up team_id (required)
+fpl points              Returns live points for your team
+fpl leagues             Returns all leagues for my team entry
+fpl league <id>         Returns confirmed scores for a league by id
+fpl liveleague <id>     Returns live scores for a league by id
+fpl entry               Returns information about your team entry
+fpl players             Returns all players, sorted by total score
 ```
 
 # Installing 
 fpl-cli has been tested with Python versions 2.7, 3.4, 3.5, 3.6 and 3.7.
-In a terminal window, verify Python version: 
+In a terminal window, verify that Python and pip is available: 
 ```
 python --version
 pip --version
@@ -25,10 +25,6 @@ pip --version
 If no Python/pip version is found, [download Python and pip before proceeding](https://www.python.org/downloads/)
 ```
 pip install fplcli
-```
-then proceed to use fpl-cli : 
-```
-fpl configure
 ```
 
 # Using fpl-cli
