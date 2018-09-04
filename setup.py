@@ -14,7 +14,7 @@ install_requires = [
     ]
 
 # Colorama is needed on Windows to enable ANSI coloring
-if sys.platform == 'win32':
+if sys.platform == 'win32' or sys.platform == 'win64':
     install_requires.append('colorama')
 else: 
     install_requires.append('termcolor')

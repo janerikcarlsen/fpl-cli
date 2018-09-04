@@ -16,8 +16,8 @@ fpl players             Returns all players in the game, sorted by total score
 ```
 
 # Installing 
-fpl-cli has been tested with Python versions 2.7, 3.4, 3.5, 3.6 and 3.7.
-In a terminal window, verify that Python and pip is available: 
+fpl-cli has been tested with Python versions 2.7, 3.4, 3.5, 3.6 and 3.7 on Mac and Linux (Windows to come) 
+In a terminal window, verify that Python and pip is available:
 ```
 python --version
 pip --version
