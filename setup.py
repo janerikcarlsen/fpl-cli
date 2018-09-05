@@ -12,12 +12,13 @@ install_requires = [
         "six", 
         "Prettytable",
         "termcolor", 
-        "colorama"
+        "colorama",
+        "configparser"
     ]
 
 setuptools.setup(
     name="fplcli",
-    version="0.1.6",
+    version="0.1.7",
     author="Jan-Erik Carlsen",
     author_email="jan.erik.carlsen@gmail.com",
     description="A CLI tool for Fantasy Premier League",
