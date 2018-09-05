@@ -63,5 +63,9 @@ arrows = {
     "same": {
         "unicode": u"\u2010",
         "color": "gray"
+    },
+    "new": {
+        "unicode": u"\u2010",
+        "color": "gray"
     }
 }
