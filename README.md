@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/janerikcarlsen/fpl-cli.svg?branch=master)](https://travis-ci.org/janerikcarlsen/fpl-cli)
 [![Python Versions](https://img.shields.io/pypi/pyversions/fplcli.svg)](https://pypi.org/project/fplcli)
+[![Downloads](http://pepy.tech/badge/fplcli)](http://pepy.tech/project/fplcli)
 
 # fpl-cli
 fpl-cli is a command line tool for Fantasy Premier League, written in Python.
