@@ -73,4 +73,10 @@ Planned future features include:
 * Cache API calls to improve response times, especially for live leagues
 * Transfer suggestions based on form and upcoming fixture difficulty
 
-Ideas for features or enhancements that you would like to see from fpl-cli are welcome, please post an [issue in the GitHub repository](https://github.com/janerikcarlsen/fpl-cli/issues), or even better, check out the [Contributing guidelines](CONTRIBUTING.md "CONTRIBUTING.md") and submit a Pull Request with the suggested change.
+Ideas for features or enhancements that you would like to see from fpl-cli are welcome. 
+Please post an [issue in the GitHub repository](https://github.com/janerikcarlsen/fpl-cli/issues), 
+or even better, check out the [Contributing guidelines](https://github.com/janerikcarlsen/fpl-cli/blob/master/CONTRIBUTING.md "CONTRIBUTING.md") 
+and submit a Pull Request with the suggested change.
+
+      fpl-cli/CONTRIBUTING.md
+    
