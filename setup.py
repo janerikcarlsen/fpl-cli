@@ -18,7 +18,7 @@ install_requires = [
 
 setuptools.setup(
     name="fplcli",
-    version="0.1.7",
+    version="0.1.8",
     author="Jan-Erik Carlsen",
     author_email="jan.erik.carlsen@gmail.com",
     description="A CLI tool for Fantasy Premier League",
