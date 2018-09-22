@@ -68,18 +68,14 @@ def pretty_leagues(leagues):
     return table
 
 
-def pretty_league(league, live=False): 
+def pretty_league(league): 
     """Formats a detailed league view in a PrettyTable"""   
     fields = ["Previous rank", "Current rank", "Arrow up/down", "Team name", "Manager name", 
                 "Gameweek score", "Total score", "Team Id"] 
     table = PrettyTable(field_names=fields)
     table.title = league.name
-    for t in league.teams: 
-        if live: 
-            row = [t.last_rank, t.rank, t.arrow["unicode"], t.entry_name, t.player_name, 
-                t.picks.score, t.total, t.entry]
-        else: 
-            row = [t.last_rank, t.rank, t.arrow["unicode"], t.entry_name, t.player_name, 
+    for t in league.teams:
+        row = [t.last_rank, t.rank, t.arrow["unicode"], t.entry_name, t.player_name, 
                 t.event_total, t.total, t.entry]
         table.add_row(row)
     table.sortby = "Current rank"
@@ -87,20 +83,32 @@ def pretty_league(league, live=False):
     table.align["Manager name"] = 'l'
     return table
 
-
-def pretty_league_live(league): 
-    """Formats a live league table where league teams score are based on livescore data"""
-    fields = ["Previous rank", "Current rank", "Arrow up/down", "Team name", "Manager name", 
-                "Gameweek score", "Total score", "Team Id"] 
+def pretty_liveleague(league): 
+    """Formats a detailed live league view in a PrettyTable"""   
+    fields = ["Prev. rank", "Live rank", "Arrow", "Team name", "Manager name", "Captain", "Chip played", 
+                "GW score", "Total score", "Prev. score", "Transfers", "Transfer hit", "Team Id"] 
     table = PrettyTable(field_names=fields)
     table.title = league.name
     for t in league.teams: 
-        row = [t.last_rank, t.rank, t.arrow["unicode"], t.entry_name, t.player_name, 
-                t.event_total, t.total, t.entry]
+        row = [ t.last_rank, 
+                t.live_rank, 
+                t.live_arrow["unicode"], 
+                t.entry_name, 
+                t.player_name, 
+                t.picks.captain[:-4], 
+                t.picks.display_chip, 
+                t.picks.score, 
+                t.live_total, 
+                t.previous_gw_total, 
+                "" if t.picks.entry_history.event_transfers == 0 else t.picks.entry_history.event_transfers, 
+                "" if t.picks.entry_history.event_transfers_cost == 0 else t.picks.entry_history.event_transfers_cost, 
+                t.entry
+            ]
         table.add_row(row)
-    table.sortby = "Current rank"
+    table.sortby = "Live rank"
     table.align["Team name"] = 'l'
-    table.align["Manager"] = 'l'
+    table.align["Manager name"] = 'l'
+    table.align["Captain"] = 'l'
     return table
 
 

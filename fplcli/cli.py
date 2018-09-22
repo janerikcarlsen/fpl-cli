@@ -5,6 +5,7 @@ from . import fplapi
 from . import configure as conf
 from .cliprinter import out
 from .cliprinter import pretty_league
+from .cliprinter import pretty_liveleague
 from .cliprinter import pretty_leagues
 from .cliprinter import pretty_picks_info
 from .cliprinter import pretty_picks_players
@@ -55,7 +56,7 @@ def league(league_id):
 def liveleague(league_id):
     """Returns live scores for a league by id"""
     league = fplapi.live_league(league_id)
-    out(pretty_league(league, live=True))
+    out(pretty_liveleague(league))
 
 
 @main.command()

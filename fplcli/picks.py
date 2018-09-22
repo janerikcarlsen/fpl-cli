@@ -7,21 +7,22 @@ import future
 from builtins import super
 from .gameweek import Gameweek
 from .player import Player
+from .constants import chips
 
 class Picks(object):
     """Contain the picks (selected players) for a team entry for a given gameweek"""
     def __init__(self, j, players_data, livescore_data, complete_entry_history, entry):
         self.active_chip = j['active_chip']
+        self.display_chip = chips[self.active_chip] if self.active_chip else ""
         self.automatic_subs = j['automatic_subs'] if j['automatic_subs'] else ""
         self.entry_history = EntryHistory(j['entry_history'])
         self.event = Gameweek(j['event'])
         self.entry = entry if entry else complete_entry_history["entry"]
         if complete_entry_history:
-            # Needed to reprocess a live league's standings
-            self.complete_entry_history = {eh['entry']: eh for eh in complete_entry_history['history']}
-
-        self.complete_entry_history = {}
+            # Needed just for live league standings
+            self.complete_entry_history = [EntryHistory(eh) for eh in complete_entry_history['history']]
         self.picks = []
+        self.captain = None
         self.players_data_indexed = {player_data['id']: player_data for i, player_data in enumerate(players_data)}
         for pick in j['picks']:
             self.picks.append(PickedPlayer(pick, self.players_data_indexed[pick['element']], self))
@@ -58,6 +59,8 @@ class Picks(object):
         
         gw_score = 0
         for pick in self.picks:
+            if pick.is_captain: 
+                self.captain = pick.displayname
             pick.gw_points = pick.multiplier * livescore_element[str(pick.id_)]["stats"]["total_points"]
             pick.stats = livescore_element[str(pick.id_)]["stats"]
             if self.player_fielded[pick.pick_position]:

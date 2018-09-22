@@ -48,11 +48,25 @@ class EntryInLeague(object):
         self.stop_event = j['stop_event']
         # Live score information 
         self.picks = picks
-        self.live_movement = None
-        self.live_rank = None
-        self.points_previous = None
+        self.previous_gw_total = None
         self.rank_previous = None
+        self.event_transfers_costs = None
+        self.live_total = None
+        self.live_movement = None
+        self.live_arrow = None
+        self.live_rank = None
+    
+    def resolve_live_movement(self): 
+        if self.movement is "new": 
+            self.live_movement = "new"
+        elif self.live_rank < self.last_rank: 
+            self.live_movement = "up"
+        elif self.live_rank > self.last_rank: 
+            self.live_movement = "down"
+        else: 
+            self.live_movement = "same"
 
+        self.live_arrow = constants.arrows[self.live_movement]
 
 class LeagueStandings(object):
     def __init__(self, j):
@@ -67,3 +81,17 @@ class LiveLeagueStandings(LeagueStandings):
         super().__init__(j)
         for team in self.teams:
             team.picks = next((picks for picks in picks_in_league if picks.entry_history.entry == team.entry), None)
+            # Recalculate live standings based on history 
+            # Get the live total for each team
+            current_gw = int(team.picks.event.id_)
+            team.previous_gw_total = team.picks.complete_entry_history[current_gw - 2].total_points
+            # Get this gameweek transfer cost for each team
+            team.event_transfers_costs = team.picks.complete_entry_history[current_gw - 1].event_transfers_cost
+            team.live_total = team.previous_gw_total + team.picks.score - team.event_transfers_costs
+            
+        # Get the updated rank for live league
+        self.teams.sort(key=lambda x:x.live_total, reverse=True)
+        for i, team in enumerate(self.teams): 
+            team.live_rank = i + 1
+            team.resolve_live_movement()
+

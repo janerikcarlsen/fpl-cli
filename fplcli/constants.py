@@ -69,3 +69,10 @@ arrows = {
         "color": "gray"
     }
 }
+
+chips = {
+    "bboost": "Bench Boost",
+    "3xc": "Triple Captain",
+    "freehit": "Free Hit",
+    "wildcard": "Wildcard"
+}
