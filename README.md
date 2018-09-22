@@ -56,7 +56,7 @@ Returns league standings for a single league. You find the league_id in the left
 ![fpl league](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_league.png "fpl league")
 
 ## Get live league standings
-Returns live league standings for a single league, where all teams score are updated in real time based on live score data. This one is a separate action from the `fpl league` action because it requires ~2 API calls for each team in the league and is therefore slower (~1-10 seconds depending on league size and response times from Fantasy Premier League API).
+Returns live league standings for a single league, where all teams score are updated in real time based on live score data. Shows live league rank, captain, gameweek score, chips played and transfer info
 
 ![fpl liveleague](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_liveleague.png "fpl liveleague")
 
@@ -64,14 +64,11 @@ Returns live league standings for a single league, where all teams score are upd
 # Planned features
 Planned future features include:
 
-* Include all major features from fantasy.premierleague.com
 * Include H2H leagues in leagues view
 * Actions that require authentication with the FPL API (Making transfers, prepare team for next Gameweek)
-* Live updates of league standings during games based on new points total
 * Include provisional bonus in live league and points view
 * Player sorting/filtering and enriched player staticstics
 * Cache API calls to improve response times, especially for live leagues
-* Transfer suggestions based on form and upcoming fixture difficulty
 
 Ideas for features or enhancements that you would like to see from fpl-cli are welcome. 
 Please post an [issue in the GitHub repository](https://github.com/janerikcarlsen/fpl-cli/issues), 
