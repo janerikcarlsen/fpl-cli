@@ -41,7 +41,7 @@ Get an overview of the allowed actions by typing `fpl` or `fpl --help`
 ![fpl help](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_help.png  "fpl help")
 
 ## Get current points total for team
-The points total and player score is updated during games based on live score data. Provisional bonus are not included yet.
+The points total and player score is updated during games based on live score data, including provisional bonus points.
 
 ![fpl points](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_points.png "fpl points")
 
@@ -50,25 +50,22 @@ Returns all leagues you participate in (Head 2 Head leagues not included yet)
 
 ![fpl leagues](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_leagues.png "fpl leagues")
 
-## Get league standings
-Returns league standings for a single league. You find the league_id in the leftmost `Id` column in the `fpl leagues` result
-
-![fpl league](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_league.png "fpl league")
-
 ## Get live league standings
 Returns live league standings for a single league, where all teams score are updated in real time based on live score data. Shows live league rank, captain, gameweek score, chips played and transfer info
 
 ![fpl liveleague](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_liveleague.png "fpl liveleague")
 
+## Get league standings
+Returns confirmed league standings for a single league. You find the league_id in the leftmost `Id` column in the `fpl leagues` result
+
+![fpl league](https://raw.githubusercontent.com/janerikcarlsen/fpl-cli/master/docs/img/fpl_league.png "fpl league")
 
 # Planned features
-Planned future features include:
 
 * Include H2H leagues in leagues view
 * Actions that require authentication with the FPL API (Making transfers, prepare team for next Gameweek)
-* Include provisional bonus in live league and points view
 * Player sorting/filtering and enriched player staticstics
-* Cache API calls to improve response times, especially for live leagues
+* Cache API calls to improve response times
 
 Ideas for features or enhancements that you would like to see from fpl-cli are welcome. 
 Please post an [issue in the GitHub repository](https://github.com/janerikcarlsen/fpl-cli/issues), 

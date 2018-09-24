@@ -3,6 +3,7 @@ Contains classes representing information about a selection of picked players fo
 team entry for a gameweek
 """
 
+import sys
 import future
 from builtins import super
 from .gameweek import Gameweek
@@ -43,7 +44,37 @@ class Picks(object):
             14: False, 
             15: False
         }
+        self.provisional_bonus = self.resolve_provisional_bonus(livescore_data)
         self.score = self.resolve_score(livescore_data["elements"])
+
+    def resolve_provisional_bonus(self, livescore_data): 
+        provisional_bonus = {}
+        for fixture in livescore_data["fixtures"]: 
+            # If bonus points not confirmed
+            if fixture["started"] and not fixture["finished"]:
+                if not (fixture["stats"][8]["bonus"]["a"] or fixture["stats"][8]["bonus"]["h"]): 
+                    bps = []
+                    for data in fixture["stats"][9]["bps"]["a"]:
+                        bps.append(data)
+                    for data in fixture["stats"][9]["bps"]["h"]:
+                        bps.append(data)
+                bps.sort(key=lambda x:x["value"], reverse=True)
+                
+                available_bonus = 3
+                last_bps = sys.maxsize
+                last_points = 3
+                for player in bps: 
+                    if player['value'] == last_bps: 
+                        provisional_bonus[player["element"]] = last_points
+                        available_bonus -= 1
+                    elif available_bonus > 0: 
+                        provisional_bonus[player["element"]] = available_bonus
+                        last_points = available_bonus
+                        available_bonus -= 1
+                        last_bps = player["value"]
+                    else: 
+                        break
+        return provisional_bonus
 
     def resolve_score(self, livescore_element):
         if self.active_chip:
@@ -62,10 +93,19 @@ class Picks(object):
             if pick.is_captain: 
                 self.captain = pick.displayname
             pick.gw_points = pick.multiplier * livescore_element[str(pick.id_)]["stats"]["total_points"]
+            # Add provisional bonus
+            pick.gw_points += pick.multiplier * self.get_provisional_bonus(pick)
             pick.stats = livescore_element[str(pick.id_)]["stats"]
             if self.player_fielded[pick.pick_position]:
                 gw_score += pick.gw_points
         return gw_score
+
+    def get_provisional_bonus(self, pick): 
+        # return provisional bonus if has any, 0 otherwise. 
+        if pick.id_ in self.provisional_bonus: 
+            return self.provisional_bonus[pick.id_]
+        else:
+            return 0
 
 
 class PickedPlayer(Player):
