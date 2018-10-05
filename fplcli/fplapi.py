@@ -1,4 +1,5 @@
 import os
+import sys
 import configparser
 import requests
 
@@ -126,4 +127,7 @@ def get_url(target, item_id=None, append=None, auth=False):
     if append:
         url += '/{}'.format(append)
     response = requests.get(url)
-    return response.json()
+    try:
+        return response.json()
+    except Exception:
+        sys.exit("Game is being updated")
