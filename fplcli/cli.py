@@ -1,4 +1,3 @@
-import os
 import sys
 import click
 from . import fplapi
@@ -14,11 +13,12 @@ from .cliprinter import pretty_entry
 
 
 def get_team_id():
-    try: 
+    try:
         config = conf.get_config()
         return config["DEFAULT"]["team_id"]
-    except KeyError: 
+    except KeyError:
         sys.exit("FPL CLI is not configured. Type: fpl configure")
+
 
 @click.group()
 def main():

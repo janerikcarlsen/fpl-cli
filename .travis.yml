@@ -19,6 +19,8 @@ matrix:
 
 install:
   - python scripts/ci_install
-script: python scripts/run_tests
+script:
+  - flake8 fplcli/*
+  - python scripts/run_tests
 after_success:
   - rm tests/coverage.xml

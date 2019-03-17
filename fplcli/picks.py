@@ -1,14 +1,14 @@
 """
-Contains classes representing information about a selection of picked players for a 
+Contains classes representing information about a selection of picked players for a
 team entry for a gameweek
 """
 
 import sys
-import future
 from builtins import super
 from .gameweek import Gameweek
 from .player import Player
 from .constants import chips
+
 
 class Picks(object):
     """Contain the picks (selected players) for a team entry for a given gameweek"""
@@ -38,59 +38,60 @@ class Picks(object):
             8: True,
             9: True,
             10: True,
-            11: True, 
-            12: False, 
-            13: False, 
-            14: False, 
+            11: True,
+            12: False,
+            13: False,
+            14: False,
             15: False
         }
         self.provisional_bonus = self.resolve_provisional_bonus(livescore_data)
         self.score = self.resolve_score(livescore_data["elements"])
 
-    def resolve_provisional_bonus(self, livescore_data): 
+    def resolve_provisional_bonus(self, livescore_data):
         provisional_bonus = {}
-        for fixture in livescore_data["fixtures"]: 
+        for fixture in livescore_data["fixtures"]:
             # If bonus points not confirmed
             if fixture["started"] and not fixture["finished"]:
-                if not (fixture["stats"][8]["bonus"]["a"] or fixture["stats"][8]["bonus"]["h"]): 
+                if not (fixture["stats"][8]["bonus"]["a"] or fixture["stats"][8]["bonus"]["h"]):
                     bps = []
                     for data in fixture["stats"][9]["bps"]["a"]:
                         bps.append(data)
                     for data in fixture["stats"][9]["bps"]["h"]:
                         bps.append(data)
-                bps.sort(key=lambda x:x["value"], reverse=True)
-                
+
+                bps.sort(key=lambda x: x["value"], reverse=True)
+
                 available_bonus = 3
                 last_bps = sys.maxsize
                 last_points = 3
-                for player in bps: 
-                    if player['value'] == last_bps: 
+                for player in bps:
+                    if player['value'] == last_bps:
                         provisional_bonus[player["element"]] = last_points
                         available_bonus -= 1
-                    elif available_bonus > 0: 
+                    elif available_bonus > 0:
                         provisional_bonus[player["element"]] = available_bonus
                         last_points = available_bonus
                         available_bonus -= 1
                         last_bps = player["value"]
-                    else: 
+                    else:
                         break
         return provisional_bonus
 
     def resolve_score(self, livescore_element):
         if self.active_chip:
             if self.active_chip == "bboost":
-                for i in [12, 13, 14, 15]: 
+                for i in [12, 13, 14, 15]:
                     self.player_fielded[i] = True
         if self.automatic_subs:
-            for autosub in self.automatic_subs: 
+            for autosub in self.automatic_subs:
                 sub_out = next((pick for pick in self.picks if pick.id_ == autosub["element_out"]), None)
                 sub_in = next((pick for pick in self.picks if pick.id_ == autosub["element_in"]), None)
                 self.player_fielded[sub_out.pick_position] = False
                 self.player_fielded[sub_in.pick_position] = True
-        
+
         gw_score = 0
         for pick in self.picks:
-            if pick.is_captain: 
+            if pick.is_captain:
                 self.captain = pick.displayname
             pick.gw_points = pick.multiplier * livescore_element[str(pick.id_)]["stats"]["total_points"]
             # Add provisional bonus
@@ -100,9 +101,9 @@ class Picks(object):
                 gw_score += pick.gw_points
         return gw_score
 
-    def get_provisional_bonus(self, pick): 
-        # return provisional bonus if has any, 0 otherwise. 
-        if pick.id_ in self.provisional_bonus: 
+    def get_provisional_bonus(self, pick):
+        # return provisional bonus if has any, 0 otherwise.
+        if pick.id_ in self.provisional_bonus:
             return self.provisional_bonus[pick.id_]
         else:
             return 0
@@ -125,10 +126,11 @@ class PickedPlayer(Player):
         if self.is_captain:
             displayname += " (c)"
         if self.is_vice_captain:
-            displayname +=  " (vc)"
+            displayname += " (vc)"
         if self.is_captain and picks.active_chip == "3xc":
             displayname += " (TC)"
         return displayname
+
 
 class EntryHistory(object):
     def __init__(self, j):

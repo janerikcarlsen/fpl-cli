@@ -1,11 +1,12 @@
 from . import constants
 from .league import LeagueEntry
 
+
 class Entry(object):
     def __init__(self, j):
-        if "entry" in j: 
-            player = j['entry']  
-        self.id_= player['id'] 
+        if "entry" in j:
+            player = j['entry']
+        self.id_ = player['id']
         self.player_first_name = player['player_first_name']
         self.player_last_name = player['player_last_name']
         self.player_region_id = player['player_region_id']

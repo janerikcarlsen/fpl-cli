@@ -19,7 +19,7 @@ teams_long = {
     18: "Watford",
     19: "West Ham",
     20: "Wolves"
-} 
+}
 
 teams_short = {
     1: "ARS",
@@ -42,7 +42,7 @@ teams_short = {
     18: "WAT",
     19: "WHU",
     20: "WOL"
-} 
+}
 
 positions = {
     1: "GK",

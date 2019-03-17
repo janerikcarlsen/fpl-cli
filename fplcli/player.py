@@ -1,6 +1,7 @@
 from . import constants
 
-class Player(object):     
+
+class Player(object):
     def __init__(self, j):
         self.total_points = j["total_points"]
         self.minutes_played = j["minutes"]
@@ -21,9 +22,11 @@ class Player(object):
         self.code = j["code"]
         self.squad_number = j["squad_number"]
         self.news = j["news"]
-        self.news_added = j["news_added"]              
-        self.chance_of_playing_this_round = j["chance_of_playing_this_round"] if j["chance_of_playing_this_round"] else ""
-        self.chance_of_playing_next_round = j["chance_of_playing_next_round"] if j["chance_of_playing_next_round"] else ""
+        self.news_added = j["news_added"]
+        self.chance_of_playing_this_round = j["chance_of_playing_this_round"] if j[
+            "chance_of_playing_this_round"] else ""
+        self.chance_of_playing_next_round = j["chance_of_playing_next_round"] if j[
+            "chance_of_playing_next_round"] else ""
         self.value_form = j["value_form"]
         self.value_season = j["value_season"]
         self.cost_change_start = j["cost_change_start"]
@@ -38,10 +41,10 @@ class Player(object):
         self.transfers_in = j["transfers_in"]
         self.transfers_out_event = j["transfers_out_event"]
         self.transfers_in_event = j["transfers_in_event"]
-        self.event_points = j["event_points"] 
-        self.expected_this = j["ep_this"] # Float
-        self.expected_next = j["ep_next"] # Float
-        self.special = j["special"] # Boolean
+        self.event_points = j["event_points"]
+        self.expected_this = j["ep_this"]  # Float
+        self.expected_next = j["ep_next"]  # Float
+        self.special = j["special"]  # Boolean
         self.goals_scored = j["goals_scored"]
         self.assists = j["assists"]
         self.clean_sheets = j["clean_sheets"]
@@ -62,17 +65,18 @@ class Player(object):
         self.team = j["team"]
         self.team_name_long = constants.teams_long[self.team]
         self.team_name = constants.teams_short[self.team]
-     
+
         if self.appearances == 0:
-            self.points_per_90, self.points_per_million, self.points_per_million_per_90, self.bonus_per_90 = [0,0,0,0]
-        else: 
-            self.points_per_90 = round(self.total_points/ self.appearances, 2)
+            self.points_per_90, self.points_per_million, self.points_per_million_per_90, self.bonus_per_90 = [0, 0, 0,
+                                                                                                              0]
+        else:
+            self.points_per_90 = round(self.total_points / self.appearances, 2)
             self.points_per_million = round(self.total_points / self.now_cost, 2)
             self.points_per_million_per_90 = round(self.points_per_90 / self.now_cost, 2)
             self.bonus_per_90 = round(j["bonus"] / self.appearances, 2)
 
-    def __str__(self): 
-        return "\t".join([((str(self.second_name)[:13])+ "  "), str(self.position), str(self.total_points), 
-            str(self.minutes_played), str(self.now_cost), str(self.points_per_game), 
-            str(self.points_per_game_per_million), str(self.bonus_per_90), str(self.points_per_90), 
-            str(self.points_per_million), str(self.points_per_game_per_million)])
+    def __str__(self):
+        return "\t".join([((str(self.second_name)[:13]) + "  "), str(self.position), str(self.total_points),
+                          str(self.minutes_played), str(self.now_cost), str(self.points_per_game),
+                          str(self.points_per_game_per_million), str(self.bonus_per_90), str(self.points_per_90),
+                          str(self.points_per_million), str(self.points_per_game_per_million)])

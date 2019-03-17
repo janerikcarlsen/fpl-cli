@@ -14,5 +14,3 @@ class Gameweek(object):
         self.is_next = j['is_next']
         self.is_previous = j['is_previous']
         self.name = j['name']
-
-        
