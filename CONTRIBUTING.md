@@ -15,8 +15,8 @@ please either file an issue in the GitHub issue tracker, or submit a Pull Reques
 * `fpl configure`
 
 # Testing and style guides
-* Unit tests are located in `tests/unit` folder, functional tests are located in `tests/functional` folder. (Still more work to be done here.)
-* The intention is for the code base to be compliant with flake8 (Still more work to be done here.)
+* Unit tests are located in `tests/unit` folder, functional tests are located in `tests/functional` folder.
+* The intention is for the code base to be compliant with flake8 with default configuration.
 
 # Submitting a Pull Request
 * Submit a Pull Request from your fork to the master branch of this repository. 

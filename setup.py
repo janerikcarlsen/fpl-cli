@@ -1,5 +1,4 @@
 import setuptools
-import sys
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -18,7 +17,7 @@ install_requires = [
 
 setuptools.setup(
     name="fplcli",
-    version="0.1.8",
+    version="0.1.9",
     author="Jan-Erik Carlsen",
     author_email="jan.erik.carlsen@gmail.com",
     description="A CLI tool for Fantasy Premier League",
