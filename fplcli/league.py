@@ -58,7 +58,7 @@ class EntryInLeague(object):
         self.live_rank = None
 
     def resolve_live_movement(self):
-        if self.movement is "new":
+        if self.movement == "new":
             self.live_movement = "new"
         elif self.live_rank < self.last_rank:
             self.live_movement = "up"

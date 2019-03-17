@@ -38,7 +38,7 @@ def update_config(config, filename):
     with open(filename, 'r') as f:
         f.readlines()
     with open(filename, 'w') as f:
-            config.write(f)
+        config.write(f)
 
 
 def _create_file(config_filename):
